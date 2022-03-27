@@ -5,16 +5,12 @@ import GameBoard from "./components/GameBoard";
 import PlayerData from "./components/PlayerData";
 import useStyles from "./components/Style";
 import {Typography} from "@material-ui/core";
-import Leaderboard from './components/Leaderboard';
 import { Values } from './components/Types';
-
-
 
 type GameData = {
   gameState : string,
   moves : number,
 }
-
 
 function App() {
   const classes = useStyles();
@@ -41,12 +37,6 @@ function App() {
     setGameMoves(newGameStatus.moves)    
   }
 
-// useEffect(() => {
-// console.log(gameMoves);
-
-// }, [gameMoves])
-
-  
   return (
     <div className={classes.App}>
       <Typography variant={"h4"} className={classes.zoominfo}>ZoomInfo Home Task connect-4 game</Typography>

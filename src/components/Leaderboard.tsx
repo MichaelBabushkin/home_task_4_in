@@ -13,6 +13,7 @@ import useStyles from "./Style";
 
 
 type RankRow = {
+  id:number,
   rank:number,
   nickname:string,
   moves : number,
@@ -22,26 +23,26 @@ type RankRow = {
 
 
 const columns: GridColDef[] = [
-  { field: 'Rank', headerName: 'Rank', width: 90 },
+  {field: 'id', headerName: 'Rank', width: 90 },
   {
-    field: 'Nickname',
+    field: 'nickname',
     headerName: 'Nickname',
     sortable: false,
     width: 150,
   },
   {
-    field: 'Highscore(moves)',
+    field: 'moves',
     headerName: 'Highscore(moves)',
     width: 150,
   },
   {
-    field: 'Time',
+    field: 'time',
     headerName: 'Time',
     sortable: false,
     width: 110,
   },
   {
-    field: 'Date',
+    field: 'date',
     headerName: 'Date',
     sortable: false,
     width: 160,
@@ -53,6 +54,7 @@ const columns: GridColDef[] = [
 function Leaderboard(){
   const classes = useStyles();
   const [highscoreData, setHighscoreData] = useState<Array<RankRow>>([{
+    id:0,
     rank:0,
     nickname:"",
     moves : 0,
@@ -63,6 +65,8 @@ function Leaderboard(){
   useEffect(() => {
     
     let prevLeaderboard = localStorage.getItem('leaderboard') || '';
+    console.log(prevLeaderboard);
+    
     let prevLeaderboardArr = prevLeaderboard ? JSON.parse(prevLeaderboard) : [];
 
     setHighscoreData(prevLeaderboardArr)
@@ -98,11 +102,12 @@ function Leaderboard(){
     // </TableContainer>
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
+        getRowId={(row) => row.id}
         rows={highscoreData}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
         disableSelectionOnClick
       />
     </div>
