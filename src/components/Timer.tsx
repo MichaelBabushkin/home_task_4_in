@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useStyles from "./Style";
 
 interface TimerState {
     time: number,
@@ -13,6 +14,7 @@ interface TimerProps {
 
 
 const Timer: React.FC<TimerProps> = ({ time }) => {
+    const classes = useStyles();
     const [timer, setTimer] = useState<TimerState>({
         time,
         minutes: Math.floor((time + 1) / 60),
@@ -36,8 +38,9 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
 
 
     return (
-        <h2>{`${timer.minutes}: ${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds
-            }`}</h2>
+        <div className={classes.timer}>
+            {`${timer.minutes}: ${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds }`}
+        </div>
     );
 };
 

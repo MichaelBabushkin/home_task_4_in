@@ -61,6 +61,10 @@ const useStyles = makeStyles(() => createStyles({
     playerDataFields:{
         display: "flex",
         flexDirection: "row",
+    },
+    timer:{
+        textAlign: "center",
+        fontSize:"35px",
     }
 }))
 
