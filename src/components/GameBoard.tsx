@@ -4,6 +4,7 @@ import AlertDialog from './AlertDialog';
 import Leaderboard from './Leaderboard';
 import { Values } from './Types';
 import Timer from './Timer';
+import { ITimerState } from './Interfaces';
 
 
 type Board = BoardCell[];
@@ -26,7 +27,7 @@ enum BoardSize {
   Rows = 6
 }
 
-const WINNING_STRAKE: number = 4;
+const WINNING_SEQUENCE: number = 4;
 
 type GameData = {
   gameState: string,
@@ -45,6 +46,7 @@ interface gameStatusProps {
   newPlayersData: Values,
   updateGameStatus: (arg: GameData) => void,
 }
+
 
 
 
@@ -75,9 +77,9 @@ function togglePlayerTurn(player: BoardCell) {
 function getGameState(board: Board) {
   // Checks wins horizontally
   for (let r = 0; r < BoardSize.Rows; r++) {
-    for (let c = 0; c <= WINNING_STRAKE; c++) {
+    for (let c = 0; c <= WINNING_SEQUENCE; c++) {
       const index = r * BoardSize.Columns + c;
-      const boardSlice = board.slice(index, index + WINNING_STRAKE);
+      const boardSlice = board.slice(index, index + WINNING_SEQUENCE);
 
       const winningResult = checkWinningSlice(boardSlice);
       if (winningResult !== false) return winningResult;
@@ -159,12 +161,19 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
 
   const [gameState, setGameState] = useState<State>({
     board: intitializeBoard(),
-    playerTurn: BoardCell.PlayerOne,
+    playerTurn: (Math.floor(Math.random() * 2) + 1==2) ? BoardCell.PlayerTwo : BoardCell.PlayerOne,
     gameStatus: GameStatus.Ongoing,
     moves: 0,
   });
 
   const [showLeaderboard, setShowLeaderboard] = useState<Boolean>(false);
+  const [gameTime, setgameTime] = useState<ITimerState>({
+    time: 0,
+    seconds: 0,
+    minutes: 0,
+  });
+
+
 
   useEffect(() => {
     // if the game is over and the result is not a draw
@@ -175,15 +184,15 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
       var arrSize = Object.keys(prevLeaderboardArr).length + 1;
 
       let winnerMoves = gameState.moves % 2 == 0 ? Math.floor(gameState.moves / 2) : Math.floor(gameState.moves / 2) + 1
-      let winnerNickname = renderGameStatus(gameState.gameStatus, gameState.moves);
-      let time = new Date().toUTCString();
+      let winnerNickname = renderGameStatus(gameState.gameStatus, gameState.moves).replace("won", "");;
+      let time =  gameTime.minutes + ":" + (gameTime.seconds > 10 ? gameTime.seconds: "0"+ gameTime.seconds);
       let date = new Date().toUTCString();
 
-
+    // save the highscore in localstorage 
       localStorage.setItem('leaderboard', JSON.stringify([...prevLeaderboardArr, { id: arrSize, moves: winnerMoves, nickname: winnerNickname, time, date }]))
     }
 
-  }, [gameState])
+  }, [gameTime])
 
 
   function updateAlertChoice(alertChoice: string): void {
@@ -279,7 +288,7 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
 
   return (
     <>
-      <Timer time={0}/>
+      <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setgameTime={setgameTime}/>
       {showLeaderboard ? <Leaderboard /> : <div className="board">{renderCells()}</div>}
       {gameState.gameStatus !== GameStatus.Ongoing &&
         <AlertDialog data={resolveGameStatusLabel()} updateAlertChoice={updateAlertChoice} isShown={true} />

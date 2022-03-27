@@ -22,9 +22,11 @@ const AlertDialog: React.FC<IAlertProps> = ({data, updateAlertChoice, isShown}) 
     }, [isShown]);
     
 
-    const handleClose = () => {
+    const handleClose = (event:Event, reason:string) => {
+        if (reason && reason == "backdropClick") 
+            return;
         setAlertOpen(false);
-    };
+    }
     const startNewGame = () => {
         setAlertOpen(false);
         updateAlertChoice("new_game")        
@@ -41,6 +43,8 @@ const AlertDialog: React.FC<IAlertProps> = ({data, updateAlertChoice, isShown}) 
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                disableEscapeKeyDown
+                hideBackdrop={false}
             >
                 <DialogTitle id="alert-dialog-title">{data}</DialogTitle>
                 <DialogContent>

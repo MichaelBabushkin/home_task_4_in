@@ -4,3 +4,4 @@ export type Values = {
     nickname2 : string,
     age2 : number,
   }
+

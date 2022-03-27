@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { ITimerState } from './Interfaces';
 import useStyles from "./Style";
 
-interface TimerState {
-    time: number,
-    seconds: number,
-    minutes: number,
-}
 
 
 interface TimerProps {
     time: number,
+    stopTimer: boolean,
+    setgameTime:(arg: ITimerState) => void,
+
 }
 
 
-const Timer: React.FC<TimerProps> = ({ time }) => {
+const Timer: React.FC<TimerProps> = ({ time ,stopTimer,setgameTime}) => {
     const classes = useStyles();
-    const [timer, setTimer] = useState<TimerState>({
+    const [timer, setTimer] = useState<ITimerState>({
         time,
         minutes: Math.floor((time + 1) / 60),
         seconds: time - Math.floor((time + 1) / 60) * 60 + 1,
     });
 
     useEffect(() => {
+        if (stopTimer) {
+            setgameTime(timer);
+            
+            return;
+        }
         setTimeout(() => {
-            // if (timer.time === 0) {
-            //     return;
-            // }
+            
+            
             setTimer({
                 time: timer.time + 1,
                 minutes: Math.floor((timer.time + 1) / 60),
@@ -38,9 +41,11 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
 
 
     return (
-        <div className={classes.timer}>
-            {`${timer.minutes}: ${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds }`}
-        </div>
+        <div className={classes.timerWrapper}>
+            <div className={classes.timer}>
+                {`${timer.minutes}: ${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds }`}
+            </div>
+         </div>
     );
 };
 

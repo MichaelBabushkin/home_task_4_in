@@ -47,9 +47,27 @@ const useStyles = makeStyles(() => createStyles({
     playerName:{
 
     },
-    playerData:{
+    playerData1:{
         width : "25%",
-        textAlign : "center"
+        textAlign : "center",
+        backgroundImage: "linear-gradient(#ffffc9, #cece00)",
+        borderRadius: "10%"
+    },
+    gameMoves:{
+        width : "25%",
+        textAlign : "center",
+        alignSelf:"center",
+    },
+    gameStatus:{
+        width : "25%",
+        textAlign : "center",
+        alignSelf:"center",
+    },
+    playerData2:{
+        width : "25%",
+        textAlign : "center",
+        backgroundImage: "linear-gradient(#fb7272, #da0000)",
+        borderRadius: "10%"
     },
     playerDataSection:{
         display: "flex",
@@ -62,10 +80,35 @@ const useStyles = makeStyles(() => createStyles({
         display: "flex",
         flexDirection: "row",
     },
+    timerWrapper:{
+        width: "100%",
+    },
     timer:{
         textAlign: "center",
         fontSize:"35px",
-    }
+        width: "100px",
+        marginLeft: "49%",
+        marginBottom: "1%",
+        border:"#62cda3  5px solid",
+        borderRadius: "10%",
+        backgroundImage: "linear-gradient(#72fbcc, #6871e2)",
+    },
+    newGameBtn:{
+        marginTop: "50px",
+        marginLeft: "50%",
+        color: "black",
+        backgroundColor: "#3170c7",
+    },
+    root: {
+        "& .MuiDataGrid-renderingZone": {
+          "& .MuiDataGrid-row": {
+            "&:nth-child(2n)": { 
+              backgroundColor: "rgba(235, 235, 235, .7)" 
+            }
+          }
+        }
+      }
+
 }))
 
 export default useStyles;
