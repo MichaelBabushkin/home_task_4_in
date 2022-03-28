@@ -5,6 +5,10 @@ import Leaderboard from './Leaderboard';
 import { Values } from './Types';
 import Timer from './Timer';
 import { ITimerState } from './Interfaces';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import useStyles from "./Style";
+
 
 
 type Board = BoardCell[];
@@ -158,10 +162,11 @@ function checkWinningSlice(miniBoard: BoardCell[]) {
 
 
 const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData }) => {
+  const classes = useStyles();
 
   const [gameState, setGameState] = useState<State>({
     board: intitializeBoard(),
-    playerTurn: (Math.floor(Math.random() * 2) + 1==2) ? BoardCell.PlayerTwo : BoardCell.PlayerOne,
+    playerTurn: (Math.floor(Math.random() * 2) + 1 == 2) ? BoardCell.PlayerTwo : BoardCell.PlayerOne,
     gameStatus: GameStatus.Ongoing,
     moves: 0,
   });
@@ -185,14 +190,20 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
 
       let winnerMoves = gameState.moves % 2 == 0 ? Math.floor(gameState.moves / 2) : Math.floor(gameState.moves / 2) + 1
       let winnerNickname = renderGameStatus(gameState.gameStatus, gameState.moves).replace("won", "");;
-      let time =  gameTime.minutes + ":" + (gameTime.seconds > 10 ? gameTime.seconds: "0"+ gameTime.seconds);
+      let time = gameTime.minutes + ":" + (gameTime.seconds > 10 ? gameTime.seconds : "0" + gameTime.seconds);
       let date = new Date().toUTCString();
 
-    // save the highscore in localstorage 
+      // save the highscore in localstorage 
       localStorage.setItem('leaderboard', JSON.stringify([...prevLeaderboardArr, { id: arrSize, moves: winnerMoves, nickname: winnerNickname, time, date }]))
     }
 
   }, [gameTime])
+
+
+  useEffect(() => {
+    // gameState.playerTurn
+
+  }, [gameState])
 
 
   function updateAlertChoice(alertChoice: string): void {
@@ -288,7 +299,9 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
 
   return (
     <>
-      <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setgameTime={setgameTime}/>
+      <div className={classes.timerWrapper}>{gameState.playerTurn == 1 ? <div className={classes.firstArrow}><ArrowBackIcon /></div> : <div className={classes.secondArrow}><ArrowForwardIcon /></div>} 
+      <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setgameTime={setgameTime} />
+      </div>
       {showLeaderboard ? <Leaderboard /> : <div className="board">{renderCells()}</div>}
       {gameState.gameStatus !== GameStatus.Ongoing &&
         <AlertDialog data={resolveGameStatusLabel()} updateAlertChoice={updateAlertChoice} isShown={true} />

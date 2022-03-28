@@ -14,7 +14,8 @@ type RankRow = {
 
 
 const columns: GridColDef[] = [
-  {field: 'id',
+  {
+    field: 'id',
     headerName: 'Rank',
     width:10,
     flex: 1
