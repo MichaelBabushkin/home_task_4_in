@@ -30,7 +30,6 @@ const Form: React.FC<formProps> = ({logChange,updateLoggedState,updatePlayersDat
         event.preventDefault();
         updateLoggedState(true)
         updatePlayersData(values);
-        console.log(values)
     }
 
     return (

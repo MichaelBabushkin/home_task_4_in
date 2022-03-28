@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import useStyles from "./Style";
-import { Values } from "./Types";
 import BrightnessAutoIcon from '@material-ui/icons/BrightnessAuto';
+import { IPlayerDataProps } from "./Interfaces";
 
-interface playerDataProps {
-    newPlayersData: Values
-    gameStatus: string,
-    gameMoves: number,
-}
-
-const PlayerData: React.FC<playerDataProps> = ({ newPlayersData, gameStatus, gameMoves }) => {
+const PlayerData: React.FC<IPlayerDataProps> = ({ newPlayersData, gameStatus, gameMoves }) => {
     const classes = useStyles();
 
     // check for highscore

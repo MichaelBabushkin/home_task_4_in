@@ -80,6 +80,8 @@ const useStyles = makeStyles(() => createStyles({
         display: "flex",
         flexDirection: "row",
     },
+
+    // timer
     timerWrapper: {
         width: "100%",
     },
@@ -93,31 +95,52 @@ const useStyles = makeStyles(() => createStyles({
         borderRadius: "10%",
         backgroundImage: "linear-gradient(#72fbcc, #6871e2)",
     },
+
+    // zoominfo logo
+    logo: {
+        maxWidth: 160,
+      },
+
+    // turn buttons
     secondArrow: {
         marginLeft: "50%",
         backgroundImage: "linear-gradient(#fb7272, #da0000)",
-        width: "50px",
+        width: "80px",
+        height: "50px",
+        paddingTop:"1%",
         textAlign: "center",
         borderRadius: "50%",
         marginBottom: "5px",
 
     },
     firstArrow: {
-        marginLeft: "50%",
+        marginLeft: "49%",
         backgroundImage: "linear-gradient(#ffffc9, #cece00)",
-        width: "50px",
-        textAlign: "center",
+        width: "80px",
+        height: "50px",
+        paddingTop:"1%",        textAlign: "center",
         borderRadius: "50%",
         marginBottom: "5px",
 
 
     },
+
+// Leaderboard 
+
     newGameBtn: {
         marginTop: "50px",
-        marginLeft: "50%",
+        marginLeft: "42%",
         color: "black",
         backgroundColor: "#3170c7",
     },
+
+    leaderboard:{
+        height: 400,
+        width: '80%',
+        backgroundImage: "linear-gradient(#88d89d, #c9c94f)",
+        marginLeft: "10%",
+        marginTop: "10%",
+    }
 
 
 }))

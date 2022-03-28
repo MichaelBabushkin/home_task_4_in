@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Button from '@material-ui/core/Button';
 import useStyles from "./Style";
 import { RankRow } from "./Types";
+import { ILeaderboard } from "./Interfaces";
 
 const columns: GridColDef[] = [
   {
@@ -37,8 +38,8 @@ const columns: GridColDef[] = [
 ];
 
 
+const Leaderboard: React.FC<ILeaderboard> = ({ setStartNewGameEvent}) => {
 
-function Leaderboard(){
   const classes = useStyles();
   const [highscoreData, setHighscoreData] = useState<Array<RankRow>>([{
     id:0,
@@ -57,7 +58,7 @@ function Leaderboard(){
   
 
     return (
-      <div style={{ height: 400, width: '80%' }}>
+      <div className={classes.leaderboard}>
         <DataGrid
           getRowId={(row) => row.id}
           rows={highscoreData}
@@ -66,7 +67,7 @@ function Leaderboard(){
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
         />
-        <Button variant="contained" color="primary" className = {classes.newGameBtn}> Start New Game</Button>
+        <Button variant="contained" color="primary" className = {classes.newGameBtn} onClick={() =>setStartNewGameEvent(true)}> Start New Game</Button>
       </div>
 
       );

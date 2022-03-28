@@ -49,6 +49,8 @@ interface State {
 interface gameStatusProps {
   newPlayersData: Values,
   updateGameStatus: (arg: GameData) => void,
+  startNewGameEvent: boolean,
+  setShowLeaderboard:(arg: boolean) => void,
 }
 
 
@@ -161,7 +163,13 @@ function checkWinningSlice(miniBoard: BoardCell[]) {
 };
 
 
-const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData }) => {
+
+
+
+
+
+
+const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData, startNewGameEvent, setShowLeaderboard }) => {
   const classes = useStyles();
 
   const [gameState, setGameState] = useState<State>({
@@ -171,13 +179,13 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
     moves: 0,
   });
 
-  const [showLeaderboard, setShowLeaderboard] = useState<Boolean>(false);
-  const [gameTime, setgameTime] = useState<ITimerState>({
+  const [gameTime, setGameTime] = useState<ITimerState>({
     time: 0,
     seconds: 0,
     minutes: 0,
   });
-
+  const [resetTimer, setResetTimer] = useState<boolean>(false);
+  const [hideBoard, setHideBoard] = useState<boolean>(true);
 
 
   useEffect(() => {
@@ -197,28 +205,38 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
       localStorage.setItem('leaderboard', JSON.stringify([...prevLeaderboardArr, { id: arrSize, moves: winnerMoves, nickname: winnerNickname, time, date }]))
     }
 
-  }, [gameTime])
-
+  }, [gameTime]);
 
   useEffect(() => {
-    // gameState.playerTurn
+    if(startNewGameEvent){
+      startNewGame();
+    }
 
-  }, [gameState])
+  }, [startNewGameEvent])
+  
+  
 
-
+//for treating the answer from the modal
   function updateAlertChoice(alertChoice: string): void {
     if (alertChoice === "leaderboard") {
-      setShowLeaderboard(true)
+      setShowLeaderboard(true);
+      setHideBoard(false);
     }
     else if (alertChoice === "new_game") {
-      setGameState({
-        board: intitializeBoard(),
-        playerTurn: BoardCell.PlayerOne,
-        gameStatus: GameStatus.Ongoing,
-        moves: 0,
-      });
-      renderGameStatus();
+      startNewGame();
     }
+  }
+
+  function startNewGame() {
+    setResetTimer(!resetTimer)
+    setHideBoard(true);
+    setGameState({
+      board: intitializeBoard(),
+      playerTurn: BoardCell.PlayerOne,
+      gameStatus: GameStatus.Ongoing,
+      moves: 0,
+    });
+    renderGameStatus();
   }
 
   function renderCells() {
@@ -275,9 +293,9 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
     } else if (gameStatus === GameStatus.Draw) {
       updateGameStatus({ gameState: 'Game is a draw', moves })
     } else if (gameStatus === GameStatus.PlayerOneWin) {
-      updateGameStatus({ gameState: newPlayersData.nickname1, moves })
+      updateGameStatus({ gameState: newPlayersData.nickname1 + ' won', moves })
     } else if (gameStatus === GameStatus.PlayerTwoWin) {
-      updateGameStatus({ gameState: newPlayersData.nickname2, moves })
+      updateGameStatus({ gameState: newPlayersData.nickname2 + ' won', moves })
     }
     return resolveGameStatusLabel();
   }
@@ -297,13 +315,16 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
     return text;
   }
 
+
+
   return (
     <>
-      <div className={classes.timerWrapper}>{gameState.playerTurn == 1 ? <div className={classes.firstArrow}><ArrowBackIcon /></div> : <div className={classes.secondArrow}><ArrowForwardIcon /></div>} 
-      <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setgameTime={setgameTime} />
+      <div className={classes.timerWrapper}>{gameState.playerTurn == 1 ?
+        <div className={classes.firstArrow}><ArrowBackIcon /></div> : 
+        <div className={classes.secondArrow}><ArrowForwardIcon /></div>} 
+        <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setGameTime={setGameTime} resetTimer={resetTimer} />
       </div>
-      {/* {showLeaderboard ? <Leaderboard /> : <div className="board">{renderCells()}</div>} */}
-      {!showLeaderboard &&  <div className="board">{renderCells()}</div>}
+      {hideBoard && <div className="board">{renderCells()}</div>}
       {gameState.gameStatus !== GameStatus.Ongoing &&
         <AlertDialog data={resolveGameStatusLabel()} updateAlertChoice={updateAlertChoice} isShown={true} />
       }

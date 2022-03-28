@@ -16,6 +16,8 @@ type GameData = {
 function App() {
   const classes = useStyles();
   const [ isLogged, setIsLogged ] = useState<boolean>(false);
+  const [ showLeaderboard, setShowLeaderboard ] = useState<boolean>(false);
+  const [ startNewGameEvent, setStartNewGameEvent ] = useState<boolean>(false);
   const [ playersData, setPlayersData ] =  useState<Values>({
     nickname1: '-',
     age1: 0,
@@ -37,15 +39,21 @@ function App() {
     setGameStatus(newGameStatus.gameState);
     setGameMoves(newGameStatus.moves)    
   }
-console.log(gameStatus);
+useEffect(() => {
+  if(startNewGameEvent){
+    setStartNewGameEvent(false);
+    setShowLeaderboard(false);
+  }
+
+},[startNewGameEvent]);
 
   return (
     <div className={classes.App}>
-      <Typography variant={"h4"} className={classes.zoominfo}>ZoomInfo Home Task connect-4 game</Typography>
+     <div><img src='./assets/ZoomInfo.jpg' className={classes.logo}></img> <Typography variant={"h4"} className={classes.zoominfo}>ZoomInfo Home Task connect-4 game</Typography></div>
       {isLogged &&<PlayerData newPlayersData={playersData} gameStatus={gameStatus} gameMoves={gameMoves}/>}
       {!isLogged &&<Form logChange={isLogged} updateLoggedState={updateLoggedState} updatePlayersData={updatePlayersData}/>}
-      {isLogged &&<GameBoard updateGameStatus={updateGameStatus} newPlayersData={playersData}/>}
-      <Leaderboard /> 
+      {isLogged &&<GameBoard updateGameStatus={updateGameStatus} newPlayersData={playersData} startNewGameEvent={startNewGameEvent} setShowLeaderboard={setShowLeaderboard}/>}
+      {showLeaderboard && <Leaderboard setStartNewGameEvent={setStartNewGameEvent}/> }
     </div>
   );
 }
