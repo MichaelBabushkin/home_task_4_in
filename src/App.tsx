@@ -6,6 +6,7 @@ import PlayerData from "./components/PlayerData";
 import useStyles from "./components/Style";
 import {Typography} from "@material-ui/core";
 import { Values } from './components/Types';
+import Leaderboard from './components/Leaderboard';
 
 type GameData = {
   gameState : string,
@@ -36,6 +37,7 @@ function App() {
     setGameStatus(newGameStatus.gameState);
     setGameMoves(newGameStatus.moves)    
   }
+console.log(gameStatus);
 
   return (
     <div className={classes.App}>
@@ -43,6 +45,7 @@ function App() {
       {isLogged &&<PlayerData newPlayersData={playersData} gameStatus={gameStatus} gameMoves={gameMoves}/>}
       {!isLogged &&<Form logChange={isLogged} updateLoggedState={updateLoggedState} updatePlayersData={updatePlayersData}/>}
       {isLogged &&<GameBoard updateGameStatus={updateGameStatus} newPlayersData={playersData}/>}
+      <Leaderboard /> 
     </div>
   );
 }

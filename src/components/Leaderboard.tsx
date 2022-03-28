@@ -2,16 +2,7 @@ import React, {useState,useEffect} from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Button from '@material-ui/core/Button';
 import useStyles from "./Style";
-
-type RankRow = {
-  id:number,
-  rank:number,
-  nickname:string,
-  moves : number,
-  time:string,
-  date:string,
-}
-
+import { RankRow } from "./Types";
 
 const columns: GridColDef[] = [
   {

@@ -5,3 +5,11 @@ export type Values = {
     age2 : number,
   }
 
+export type RankRow = {
+  id:number,
+  rank:number,
+  nickname:string,
+  moves : number,
+  time:string,
+  date:string,
+}

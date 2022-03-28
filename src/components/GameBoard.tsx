@@ -302,7 +302,8 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
       <div className={classes.timerWrapper}>{gameState.playerTurn == 1 ? <div className={classes.firstArrow}><ArrowBackIcon /></div> : <div className={classes.secondArrow}><ArrowForwardIcon /></div>} 
       <Timer time={0} stopTimer={gameState.gameStatus !== GameStatus.Ongoing} setgameTime={setgameTime} />
       </div>
-      {showLeaderboard ? <Leaderboard /> : <div className="board">{renderCells()}</div>}
+      {/* {showLeaderboard ? <Leaderboard /> : <div className="board">{renderCells()}</div>} */}
+      {!showLeaderboard &&  <div className="board">{renderCells()}</div>}
       {gameState.gameStatus !== GameStatus.Ongoing &&
         <AlertDialog data={resolveGameStatusLabel()} updateAlertChoice={updateAlertChoice} isShown={true} />
       }
