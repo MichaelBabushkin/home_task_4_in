@@ -197,7 +197,7 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
       var arrSize = Object.keys(prevLeaderboardArr).length + 1;
 
       let winnerMoves = gameState.moves % 2 == 0 ? Math.floor(gameState.moves / 2) : Math.floor(gameState.moves / 2) + 1
-      let winnerNickname = renderGameStatus(gameState.gameStatus, gameState.moves).replace("won", "");;
+      let winnerNickname = renderGameStatus(gameState.gameStatus, gameState.moves).replace("won", "").trim();
       let time = gameTime.minutes + ":" + (gameTime.seconds > 10 ? gameTime.seconds : "0" + gameTime.seconds);
       let date = new Date().toUTCString();
 

@@ -5,13 +5,10 @@ import GameBoard from "./components/GameBoard";
 import PlayerData from "./components/PlayerData";
 import useStyles from "./components/Style";
 import {Typography} from "@material-ui/core";
-import { Values } from './components/Types';
+import { GameData, Values } from './components/Types';
 import Leaderboard from './components/Leaderboard';
+import Icon from '@material-ui/core/Icon';
 
-type GameData = {
-  gameState : string,
-  moves : number,
-}
 
 function App() {
   const classes = useStyles();
@@ -49,7 +46,10 @@ useEffect(() => {
 
   return (
     <div className={classes.App}>
-     <div><img src='./assets/ZoomInfo.jpg' className={classes.logo}></img> <Typography variant={"h4"} className={classes.zoominfo}>ZoomInfo Home Task connect-4 game</Typography></div>
+    {/* <Icon >
+        <img className={classes.logo} src="./zoominfo-logo-vector.svg"/>
+    </Icon> */}
+     <div> <Typography variant={"h4"} className={classes.zoominfo}>ZoomInfo Home Task connect-4 game</Typography></div>
       {isLogged &&<PlayerData newPlayersData={playersData} gameStatus={gameStatus} gameMoves={gameMoves}/>}
       {!isLogged &&<Form logChange={isLogged} updateLoggedState={updateLoggedState} updatePlayersData={updatePlayersData}/>}
       {isLogged &&<GameBoard updateGameStatus={updateGameStatus} newPlayersData={playersData} startNewGameEvent={startNewGameEvent} setShowLeaderboard={setShowLeaderboard}/>}

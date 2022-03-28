@@ -140,6 +140,11 @@ const useStyles = makeStyles(() => createStyles({
         backgroundImage: "linear-gradient(#88d89d, #c9c94f)",
         marginLeft: "10%",
         marginTop: "10%",
+    },
+
+    // error
+    error:{
+        color:"red"
     }
 
 

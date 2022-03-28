@@ -45,6 +45,7 @@ const AlertDialog: React.FC<IAlertProps> = ({data, updateAlertChoice, isShown}) 
                 aria-describedby="alert-dialog-description"
                 disableEscapeKeyDown
                 hideBackdrop={false}
+                
             >
                 <DialogTitle id="alert-dialog-title">{data}</DialogTitle>
                 <DialogContent>

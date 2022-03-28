@@ -13,3 +13,8 @@ export type RankRow = {
   time:string,
   date:string,
 }
+
+export type GameData = {
+  gameState : string,
+  moves : number,
+}

@@ -15,6 +15,7 @@ interface formProps {
 const Form: React.FC<formProps> = ({logChange,updateLoggedState,updatePlayersData}) =>{
 
     const classes = useStyles();
+    const [error, setError] = useState<string>('')
     const [values,setValues] = useState<Values>({
         nickname1 : "",
         age1 : 0,
@@ -28,8 +29,13 @@ const Form: React.FC<formProps> = ({logChange,updateLoggedState,updatePlayersDat
 
     const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        updateLoggedState(true)
-        updatePlayersData(values);
+        if(values.nickname1 !== "" && values.nickname2 !== "" && values.age1 !==0 && values.age2 !== 0){
+            updateLoggedState(true)
+            updatePlayersData(values);
+            setError("")
+        }else{
+            setError("Please fill all the fields correctly")
+        }
     }
 
     return (
@@ -52,6 +58,7 @@ const Form: React.FC<formProps> = ({logChange,updateLoggedState,updatePlayersDat
                </div> 
             </div>
                 <Button type={"submit"} variant={"contained"} className={classes.submitButton}>Lets Start</Button>
+                <div className={classes.error}>{error}</div>
             </form>
         </Paper>
     );
