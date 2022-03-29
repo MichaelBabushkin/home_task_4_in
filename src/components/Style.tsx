@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles } from "@material-ui/core";
+import { maxHeight } from '@mui/system';
 
 const useStyles = makeStyles(() => createStyles({
     // general app
@@ -9,7 +10,7 @@ const useStyles = makeStyles(() => createStyles({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         width: '100vw',
-        height: '100vh'
+        height: '120vh'
     },
     container: {
         backgroundImage: "linear-gradient(to right, #DECBA4, #ccaec1)",
@@ -98,6 +99,8 @@ const useStyles = makeStyles(() => createStyles({
     // zoominfo logo
     logo: {
         maxWidth: 160,
+        maxHeight: 60,
+        marginTop: -60
     },
 
     // turn buttons
