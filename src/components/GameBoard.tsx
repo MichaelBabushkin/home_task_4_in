@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import "../App.css";
 import AlertDialog from './AlertDialog';
 import Leaderboard from './Leaderboard';
-import { Board, Values } from './Types';
+import { Board, Values } from '../datatypes/Types';
 import Timer from './Timer';
-import { IGameStatusProps, IState, ITimerState } from './Interfaces';
+import { IGameStatusProps, IState, ITimerState } from '../datatypes/Interfaces';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import useStyles from "./Style";
-import { BoardCell, BoardSize, GameStatus } from './Enums';
+import { BoardCell, BoardSize, GameStatus } from '../datatypes/Enums';
 
 const WINNING_SEQUENCE: number = 4;
 

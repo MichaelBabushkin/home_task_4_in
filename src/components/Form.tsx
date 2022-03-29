@@ -3,8 +3,8 @@ import {Typography,Paper,Button} from "@material-ui/core";
 
 import FormTextField from "./FormTextField";
 import useStyles from "./Style";
-import { Values } from "./Types";
-import { IFormProps } from "./Interfaces";
+import { Values } from "../datatypes/Types";
+import { IFormProps } from "../datatypes/Interfaces";
 
 const Form: React.FC<IFormProps> = ({logChange,updateLoggedState,updatePlayersData}) =>{
 

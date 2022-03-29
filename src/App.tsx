@@ -5,7 +5,7 @@ import GameBoard from "./components/GameBoard";
 import PlayerData from "./components/PlayerData";
 import useStyles from "./components/Style";
 import { Typography } from "@material-ui/core";
-import { GameData, Values } from './components/Types';
+import { GameData, Values } from './datatypes/Types';
 import Leaderboard from './components/Leaderboard';
 import Logo from './components/Logo';
 

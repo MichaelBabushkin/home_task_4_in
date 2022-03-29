@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextField} from "@material-ui/core";
 import useStyles from './Style';
-import { IFormTextFieldProps } from './Types';
+import { IFormTextFieldProps } from '../datatypes/Types';
 
 
 function FormTextField (props: IFormTextFieldProps){

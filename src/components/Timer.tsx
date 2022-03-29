@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ITimerProps, ITimerState } from './Interfaces';
+import { ITimerProps, ITimerState } from '../datatypes/Interfaces';
 import useStyles from "./Style";
 
 const Timer: React.FC<ITimerProps> = ({ time ,stopTimer,setGameTime, resetTimer}) => {

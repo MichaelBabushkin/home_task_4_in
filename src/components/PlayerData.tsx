@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import useStyles from "./Style";
 import BrightnessAutoIcon from '@material-ui/icons/BrightnessAuto';
-import { IPlayerDataProps } from "./Interfaces";
+import { IPlayerDataProps } from "../datatypes/Interfaces";
 
 const PlayerData: React.FC<IPlayerDataProps> = ({ newPlayersData, gameStatus, gameMoves }) => {
     const classes = useStyles();
