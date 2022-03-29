@@ -4,15 +4,9 @@ import {Typography,Paper,Button} from "@material-ui/core";
 import FormTextField from "./FormTextField";
 import useStyles from "./Style";
 import { Values } from "./Types";
+import { IFormProps } from "./Interfaces";
 
-interface formProps {
-    logChange: boolean,
-    updateLoggedState: (arg: boolean) => void,
-    updatePlayersData: (arg: Values) => void,
-  }
-
-
-const Form: React.FC<formProps> = ({logChange,updateLoggedState,updatePlayersData}) =>{
+const Form: React.FC<IFormProps> = ({logChange,updateLoggedState,updatePlayersData}) =>{
 
     const classes = useStyles();
     const [error, setError] = useState<string>('')

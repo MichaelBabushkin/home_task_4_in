@@ -37,7 +37,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-
 const Leaderboard: React.FC<ILeaderboard> = ({ setStartNewGameEvent}) => {
 
   const classes = useStyles();

@@ -1,14 +1,10 @@
 import React from 'react';
 import {TextField} from "@material-ui/core";
 import useStyles from './Style';
+import { IFormTextFieldProps } from './Types';
 
 
-type formTextFieldProps = {
-    label: string,
-    name: string,
-    changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}
-function FormTextField (props: formTextFieldProps){
+function FormTextField (props: IFormTextFieldProps){
   const classes = useStyles();
   return (
     <TextField

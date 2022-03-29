@@ -6,8 +6,8 @@ import { IPlayerDataProps } from "./Interfaces";
 
 const PlayerData: React.FC<IPlayerDataProps> = ({ newPlayersData, gameStatus, gameMoves }) => {
     const classes = useStyles();
-const [playerHigh1, setPlayerHigh1] = useState<number>(0)
-const [playerHigh2, setPlayerHigh2] = useState<number>(0)
+    const [playerHigh1, setPlayerHigh1] = useState<number>(0)
+    const [playerHigh2, setPlayerHigh2] = useState<number>(0)
 
     // check for highscore
 
@@ -27,18 +27,18 @@ const [playerHigh2, setPlayerHigh2] = useState<number>(0)
     return (
         <div className={classes.playerDataSection}>
             <div className={classes.playerData1}>
-                <Typography variant={"h4"} className={classes.playerName}>Nickname:{newPlayersData.nickname1} ({newPlayersData.age1}) </Typography>
-                <Typography variant={"h4"} className={classes.playerName}>Highscore:{playerHigh1}</Typography>
+                <Typography variant={"h4"} >Nickname:{newPlayersData.nickname1} ({newPlayersData.age1}) </Typography>
+                <Typography variant={"h4"} >Highscore:{playerHigh1}</Typography>
             </div>
             <div className={classes.gameMoves}>
-                <Typography variant={"h4"} className={classes.playerName}>{gameMoves % 2 == 0 ? Math.floor(gameMoves / 2) : Math.floor(gameMoves / 2) + 1} moves played </Typography>
+                <Typography variant={"h4"}>{gameMoves % 2 == 0 ? Math.floor(gameMoves / 2) : Math.floor(gameMoves / 2) + 1} moves played </Typography>
             </div>
             <div className={classes.gameStatus}>
-                <Typography variant={"h4"} className={classes.playerName}>{gameStatus.includes("won") ? <BrightnessAutoIcon /> : ''} {gameStatus} </Typography>
+                <Typography variant={"h4"} >{gameStatus.includes("won") ? <BrightnessAutoIcon /> : ''} {gameStatus} </Typography>
             </div>
             <div className={classes.playerData2}>
-                <Typography variant={"h4"} className={classes.playerName}>Nickname:{newPlayersData.nickname2} ({newPlayersData.age2}) </Typography>
-                <Typography variant={"h4"} className={classes.playerName}>Highscore:{playerHigh2}</Typography>
+                <Typography variant={"h4"}>Nickname:{newPlayersData.nickname2} ({newPlayersData.age2}) </Typography>
+                <Typography variant={"h4"}>Highscore:{playerHigh2}</Typography>
             </div>
         </div>
     );

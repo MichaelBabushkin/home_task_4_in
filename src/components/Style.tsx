@@ -2,6 +2,7 @@ import React from 'react';
 import { createStyles, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => createStyles({
+    // general app
     App: {
         backgroundImage: 'linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% )',
         backgroundPosition: 'center',
@@ -9,10 +10,6 @@ const useStyles = makeStyles(() => createStyles({
         backgroundRepeat: 'no-repeat',
         width: '100vw',
         height: '100vh'
-    },
-    form: {
-        display: "flex",
-        flexDirection: "column",
     },
     container: {
         backgroundImage: "linear-gradient(to right, #DECBA4, #ccaec1)",
@@ -25,6 +22,12 @@ const useStyles = makeStyles(() => createStyles({
     },
     title: {
         margin: "0px 0 20px 0"
+    },
+
+    // form 
+    form: {
+        display: "flex",
+        flexDirection: "column",
     },
     playerTitle: {
         width: "50%",
@@ -44,9 +47,7 @@ const useStyles = makeStyles(() => createStyles({
         textAlign: "center",
         backgroundColor: "cadetblue",
     },
-    playerName: {
-
-    },
+    // player data section
     playerData1: {
         width: "25%",
         textAlign: "center",
@@ -73,9 +74,7 @@ const useStyles = makeStyles(() => createStyles({
         display: "flex",
         flexDirection: "row",
     },
-    leaderboardTable: {
 
-    },
     playerDataFields: {
         display: "flex",
         flexDirection: "row",
@@ -99,7 +98,7 @@ const useStyles = makeStyles(() => createStyles({
     // zoominfo logo
     logo: {
         maxWidth: 160,
-      },
+    },
 
     // turn buttons
     secondArrow: {
@@ -107,7 +106,7 @@ const useStyles = makeStyles(() => createStyles({
         backgroundImage: "linear-gradient(#fb7272, #da0000)",
         width: "80px",
         height: "50px",
-        paddingTop:"1%",
+        paddingTop: "1%",
         textAlign: "center",
         borderRadius: "50%",
         marginBottom: "5px",
@@ -118,14 +117,14 @@ const useStyles = makeStyles(() => createStyles({
         backgroundImage: "linear-gradient(#ffffc9, #cece00)",
         width: "80px",
         height: "50px",
-        paddingTop:"1%",        textAlign: "center",
+        paddingTop: "1%", textAlign: "center",
         borderRadius: "50%",
         marginBottom: "5px",
 
 
     },
 
-// Leaderboard 
+    // Leaderboard 
 
     newGameBtn: {
         marginTop: "50px",
@@ -134,7 +133,7 @@ const useStyles = makeStyles(() => createStyles({
         backgroundColor: "#3170c7",
     },
 
-    leaderboard:{
+    leaderboard: {
         height: 400,
         width: '80%',
         backgroundImage: "linear-gradient(#88d89d, #c9c94f)",
@@ -143,8 +142,8 @@ const useStyles = makeStyles(() => createStyles({
     },
 
     // error
-    error:{
-        color:"red"
+    error: {
+        color: "red"
     }
 
 

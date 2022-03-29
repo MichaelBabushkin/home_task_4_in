@@ -2,59 +2,15 @@ import React, { useEffect, useState } from 'react';
 import "../App.css";
 import AlertDialog from './AlertDialog';
 import Leaderboard from './Leaderboard';
-import { Values } from './Types';
+import { Board, Values } from './Types';
 import Timer from './Timer';
-import { ITimerState } from './Interfaces';
+import { IGameStatusProps, IState, ITimerState } from './Interfaces';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import useStyles from "./Style";
-
-
-
-type Board = BoardCell[];
-
-enum BoardCell {
-  Empty = 0,
-  PlayerOne = 1,
-  PlayerTwo = 2
-}
-
-enum GameStatus {
-  Ongoing = -1,
-  Draw = 0,
-  PlayerOneWin = BoardCell.PlayerOne,
-  PlayerTwoWin = BoardCell.PlayerTwo
-}
-
-enum BoardSize {
-  Columns = 7,
-  Rows = 6
-}
+import { BoardCell, BoardSize, GameStatus } from './Enums';
 
 const WINNING_SEQUENCE: number = 4;
-
-type GameData = {
-  gameState: string,
-  moves: number,
-}
-
-interface State {
-  board: Board,
-  playerTurn: BoardCell,
-  gameStatus: GameStatus | BoardCell,
-  moves: number,
-
-}
-
-interface gameStatusProps {
-  newPlayersData: Values,
-  updateGameStatus: (arg: GameData) => void,
-  startNewGameEvent: boolean,
-  setShowLeaderboard:(arg: boolean) => void,
-}
-
-
-
 
 function intitializeBoard() {
   const board = [];
@@ -164,15 +120,10 @@ function checkWinningSlice(miniBoard: BoardCell[]) {
 
 
 
-
-
-
-
-
-const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData, startNewGameEvent, setShowLeaderboard }) => {
+const GameBoard: React.FC<IGameStatusProps> = ({ updateGameStatus, newPlayersData, startNewGameEvent, setShowLeaderboard }) => {
   const classes = useStyles();
 
-  const [gameState, setGameState] = useState<State>({
+  const [gameState, setGameState] = useState<IState>({
     board: intitializeBoard(),
     playerTurn: (Math.floor(Math.random() * 2) + 1 == 2) ? BoardCell.PlayerTwo : BoardCell.PlayerOne,
     gameStatus: GameStatus.Ongoing,
@@ -240,12 +191,12 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
   }
 
   function renderCells() {
-    const { board }: State = gameState;
+    const { board }: IState = gameState;
     return board.map((player, index) => renderCell(player, index));
   };
 
   function handleOnClick(index: number) {
-    const { gameStatus, board }: State = gameState;
+    const { gameStatus, board }: IState = gameState;
 
     if (gameStatus !== GameStatus.Ongoing) return
 
@@ -256,7 +207,7 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
   };
 
   function makeMove(column: number) {
-    let { board, playerTurn, moves }: State = gameState;
+    let { board, playerTurn, moves }: IState = gameState;
 
     const index = findLowestEmptyIndex(board, column);
 
@@ -301,7 +252,7 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
   }
 
   function resolveGameStatusLabel() {
-    const { gameStatus }: State = gameState;
+    const { gameStatus }: IState = gameState;
     let text = '';
     if (gameStatus === GameStatus.Ongoing) {
       text = 'Game is ongoing'
@@ -314,7 +265,6 @@ const GameBoard: React.FC<gameStatusProps> = ({ updateGameStatus, newPlayersData
     }
     return text;
   }
-
 
 
   return (

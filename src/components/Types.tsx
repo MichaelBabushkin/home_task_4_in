@@ -1,3 +1,5 @@
+import { BoardCell } from "./Enums";
+
 export type Values = {
     nickname1 : string,
     age1 : number,
@@ -18,3 +20,12 @@ export type GameData = {
   gameState : string,
   moves : number,
 }
+
+export type IFormTextFieldProps = {
+  label: string,
+  name: string,
+  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+}
+
+export type Board = BoardCell[];
+
